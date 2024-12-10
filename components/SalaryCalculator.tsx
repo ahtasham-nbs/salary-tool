@@ -5,6 +5,7 @@ import SalaryInput from './calculator/SalaryInput';
 import ResultsSummary from './calculator/ResultsSummary';
 import AllowancesSection from './calculator/AllowancesSection';
 import GrandTotal from './calculator/GrandTotal';
+import Loader from './ui/Loader';
 import { calculateSalaryBreakdown } from '@/utils/calculations';
 import { Allowances } from '@/types';
 
@@ -30,11 +31,15 @@ const initialAllowances: Allowances = {
 export default function SalaryCalculator() {
   const [salary, setSalary] = useState<number>(0);
   const [allowances, setAllowances] = useState<Allowances>(initialAllowances);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Load saved data from localStorage on component mount
   useEffect(() => {
-    const loadSavedData = () => {
+    const loadSavedData = async () => {
       try {
+        // Simulate network delay for smoother UX
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
         // Load salary
         const savedSalary = localStorage.getItem(STORAGE_KEYS.SALARY);
         if (savedSalary !== null) {
@@ -49,7 +54,6 @@ export default function SalaryCalculator() {
         if (savedAllowances !== null) {
           try {
             const parsedAllowances = JSON.parse(savedAllowances) as Allowances;
-            // Validate the parsed data has the expected structure
             if (parsedAllowances && 
                 typeof parsedAllowances === 'object' && 
                 'fuel' in parsedAllowances &&
@@ -64,6 +68,8 @@ export default function SalaryCalculator() {
         }
       } catch (error) {
         console.error('Error loading saved data:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -93,6 +99,10 @@ export default function SalaryCalculator() {
   };
 
   const calculation = calculateSalaryBreakdown(salary);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6">
