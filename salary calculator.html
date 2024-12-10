@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator-card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            background: white;
+        }
+        .result-box {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .tax-breakdown {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="calculator-card p-4">
+            <h2 class="text-center mb-4">Salary & Tax Calculator</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-8 mx-auto">
+                    <div class="input-group">
+                        <span class="input-group-text">PKR</span>
+                        <input type="number" 
+                               class="form-control form-control-lg" 
+                               id="salaryInput" 
+                               placeholder="Enter Monthly Salary"
+                               autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="result-box">
+                        <h5 class="text-muted mb-2">Monthly Take-Home</h5>
+                        <div class="result-value text-success">
+                            PKR <span id="salaryAfterTax">0.00</span>
+                        </div>
+                        <div class="tax-breakdown">
+                            After all deductions
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="result-box">
+                        <h5 class="text-muted mb-2">Monthly Tax</h5>
+                        <div class="result-value text-danger">
+                            PKR <span id="taxPerMonth">0.00</span>
+                        </div>
+                        <div class="tax-breakdown">
+                            Tax deducted per month
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="result-box">
+                        <h5 class="text-muted mb-3">Salary Breakdown</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Gross Monthly Salary: <span id="grossSalary" class="fw-bold">0.00</span></p>
+                                <p>Tax-Free Component (10%): <span id="taxFreePortion" class="fw-bold">0.00</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Taxable Monthly Salary: <span id="taxableSalary" class="fw-bold">0.00</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="result-box">
+                        <h5 class="text-muted mb-3">Reimbursements & Allowances</h5>
+                        
+                        <!-- Fuel Allowance Section -->
+                        <div class="mb-4">
+                            <h6 class="text-primary mb-3">Fuel Allowance</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text">PKR</span>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               id="fuelPrice" 
+                                               placeholder="Price per Liter">
+                                        <span class="input-group-text">/Liter</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="number" 
+                                               class="form-control" 
+                                               id="fuelQuantity" 
+                                               placeholder="Allowed Quantity">
+                                        <span class="input-group-text">Liters</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="alert alert-info mb-0">
+                                        Total Fuel Allowance: PKR <span id="totalFuelAllowance" class="fw-bold">0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Allowances Section -->
+                        <div>
+                            <h6 class="text-primary mb-3">Other Allowances</h6>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Medical Allowance</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">PKR</span>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               id="medicalAllowance" 
+                                               placeholder="Amount">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Internet Allowance</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">PKR</span>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               id="internetAllowance" 
+                                               placeholder="Amount">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Gym Allowance</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">PKR</span>
+                                        <input type="number" 
+                                               class="form-control" 
+                                               id="gymAllowance" 
+                                               placeholder="Amount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Reimbursements Summary -->
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Total Monthly Reimbursements</h6>
+                                    <div class="h4 text-success">
+                                        PKR <span id="totalReimbursements">0.00</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small text-muted">
+                                        <div>Fuel: PKR <span id="fuelSummary">0.00</span></div>
+                                        <div>Medical: PKR <span id="medicalSummary">0.00</span></div>
+                                        <div>Internet: PKR <span id="internetSummary">0.00</span></div>
+                                        <div>Gym: PKR <span id="gymSummary">0.00</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateTax24to25(amount) {
+            var taxAmount = 0;
+            if (amount > 600000 && amount <= 1200000) {
+                amount -= 600000;
+                taxAmount = amount * 0.05;
+            } else if (amount > 1200000 && amount <= 2200000) {
+                amount -= 1200000;
+                taxAmount = 30000 + amount * 0.15;
+            } else if (amount > 2200000 && amount <= 3200000) {
+                amount -= 2200000;
+                taxAmount = 180000 + amount * 0.25;
+            } else if (amount > 3200000 && amount <= 4100000) {
+                amount -= 3200000;
+                taxAmount = 430000 + amount * 0.3;
+            } else if (amount > 4100000) {
+                amount -= 4100000;
+                taxAmount = 700000 + amount * 0.35;
+            }
+            return round(taxAmount);
+        }
+
+        function round(num) {
+            return +Math.round(num);
+        }
+
+        function formatNumber(num) {
+            return num.toLocaleString('en-PK', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function updateTaxAndSalary() {
+            const perMonthSalary = parseFloat(document.getElementById("salaryInput").value) || 0;
+            const taxFreeSalary = perMonthSalary * 10 / 100;
+            const newSalaryPerMonth = perMonthSalary - taxFreeSalary;
+
+            const salaryByYear = newSalaryPerMonth * 12;
+            const taxPerYear = calculateTax24to25(salaryByYear);
+            const taxPerMonth = taxPerYear / 12;
+            const salaryAfterTax = newSalaryPerMonth - taxPerMonth + taxFreeSalary;
+
+            // Update display elements (removed annual tax updates)
+            document.getElementById("taxPerMonth").innerText = formatNumber(taxPerMonth);
+            document.getElementById("salaryAfterTax").innerText = formatNumber(salaryAfterTax);
+            document.getElementById("grossSalary").innerText = formatNumber(perMonthSalary);
+            document.getElementById("taxFreePortion").innerText = formatNumber(taxFreeSalary);
+            document.getElementById("taxableSalary").innerText = formatNumber(newSalaryPerMonth);
+        }
+
+        function calculateReimbursements() {
+            // Get fuel allowance values
+            const fuelPrice = parseFloat(document.getElementById("fuelPrice").value) || 0;
+            const fuelQuantity = parseFloat(document.getElementById("fuelQuantity").value) || 0;
+            const totalFuel = fuelPrice * fuelQuantity;
+
+            // Get other allowances
+            const medical = parseFloat(document.getElementById("medicalAllowance").value) || 0;
+            const internet = parseFloat(document.getElementById("internetAllowance").value) || 0;
+            const gym = parseFloat(document.getElementById("gymAllowance").value) || 0;
+
+            // Calculate total
+            const total = totalFuel + medical + internet + gym;
+
+            // Update displays
+            document.getElementById("totalFuelAllowance").innerText = formatNumber(totalFuel);
+            document.getElementById("totalReimbursements").innerText = formatNumber(total);
+            
+            // Update summary
+            document.getElementById("fuelSummary").innerText = formatNumber(totalFuel);
+            document.getElementById("medicalSummary").innerText = formatNumber(medical);
+            document.getElementById("internetSummary").innerText = formatNumber(internet);
+            document.getElementById("gymSummary").innerText = formatNumber(gym);
+        }
+
+        // Add an event listener to the input field
+        document.getElementById("salaryInput").addEventListener("input", updateTaxAndSalary);
+        document.getElementById("fuelPrice").addEventListener("input", calculateReimbursements);
+        document.getElementById("fuelQuantity").addEventListener("input", calculateReimbursements);
+        document.getElementById("medicalAllowance").addEventListener("input", calculateReimbursements);
+        document.getElementById("internetAllowance").addEventListener("input", calculateReimbursements);
+        document.getElementById("gymAllowance").addEventListener("input", calculateReimbursements);
+    </script>
+</body>
+</html>
