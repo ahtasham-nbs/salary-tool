@@ -32,6 +32,7 @@ export default function SalaryCalculator() {
   const [salary, setSalary] = useState<number>(0);
   const [allowances, setAllowances] = useState<Allowances>(initialAllowances);
   const [isLoading, setIsLoading] = useState(true);
+  const [isReimbursementsOpen, setIsReimbursementsOpen] = useState(true);
 
   // Load saved data from localStorage on component mount
   useEffect(() => {
@@ -134,10 +135,26 @@ export default function SalaryCalculator() {
       
       <ResultsSummary calculation={calculation} />
       
-      <AllowancesSection 
-        allowances={allowances}
-        setAllowances={handleAllowancesChange}
-      />
+      <div className="mt-8">
+        <button
+          onClick={() => setIsReimbursementsOpen(!isReimbursementsOpen)}
+          className="flex items-center justify-between w-full text-left font-semibold text-xl mb-4"
+        >
+          <span>Reimbursements & Allowances</span>
+          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+            {isReimbursementsOpen ? '−' : '+'}
+          </span>
+        </button>
+        
+        {isReimbursementsOpen && (
+          <div className="space-y-4">
+            <AllowancesSection 
+              allowances={allowances}
+              setAllowances={handleAllowancesChange}
+            />
+          </div>
+        )}
+      </div>
 
       <GrandTotal 
         salaryCalculation={calculation}
