@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     'salary breakdown',
     'professional tax calculator'
   ].join(', '),
+  other: {
+    "google-site-verification": "xPUE0MmHuiHl4TQOgvRGduY_VQ3gJEAgac1IGjdpucI",
+  },
   authors: [{ name: 'Ahtasham', url: 'https://northbaysolutions.net' }],
   creator: 'Ahtasham',
   publisher: 'NorthBay Solutions Pakistan',
