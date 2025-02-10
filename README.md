@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NorthBay Salary Calculator
+
+A comprehensive salary calculation tool designed specifically for NorthBay Solutions Pakistan employees. This application helps employees calculate their take-home salary, manage allowances, and understand tax implications.
+
+## Overview
+
+The NorthBay Salary Calculator provides accurate calculations for:
+- Monthly take-home salary
+- Tax deductions based on latest FBR slabs
+- Provident Fund contributions
+- Various allowances including fuel, medical, internet, and gym
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18.0 or higher
+- npm, yarn, or pnpm
 
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/ahtasham-nbs/salary-tool.git
+cd salary-tool
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features Explained
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Tax Calculation
+- Implements latest FBR tax slabs for 2024-25
+- Automatically calculates monthly
+- Includes 10% tax-free component
 
-## Learn More
+### Provident Fund
+- Optional 5% PF deduction
+- Integrated into final salary calculation
 
-To learn more about Next.js, take a look at the following resources:
+### Allowances Management
+- Fuel allowance with quantity and price calculations
+- Medical allowance tracking
+- Internet allowance management
+- Gym allowance support
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
+```
+├── app/                  # Next.js app directory
+│   ├── about/           # About page
+│   ├── changelog/       # Changelog page
+│   ├── faq/            # FAQ page
+│   └── page.tsx        # Home page
+├── components/          # Reusable components
+├── types/              # TypeScript definitions
+└── utils/              # Utility functions
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Technology Stack
+- Next.js 15.1.0
+- React 19.0.0
+- TypeScript
+- Tailwind CSS
+- Framer Motion
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Support
+
+For support, please contact [ahtasham.abbas@northbaysolutions.net](mailto:ahtasham.abbas@northbaysolutions.net)
+
+## Deployment
+
+The application is deployed on Vercel. For deployment instructions, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## FAQ
+
+For frequently asked questions, please refer to the [FAQ page](https://nbs-salary-tool.vercel.app/faq).
+
+## Changelog
+
+View our [changelog](https://nbs-salary-tool.vercel.app/changelog) to stay updated with the latest improvements and features.
