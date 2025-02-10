@@ -4,16 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
-export default function Navigation() {
+export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const navItems = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
     { href: '/faq', label: 'FAQ' },
-    // { href: '/contact', label: 'Contact' }
+    { href: '/about', label: 'About' },
   ];
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href="/public" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">N</span>
               </div>

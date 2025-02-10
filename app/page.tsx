@@ -6,7 +6,7 @@ import { metadata as baseMetadata } from './metadata';
 export const metadata: Metadata = {
   ...baseMetadata,
   alternates: {
-    canonical: 'https://northbaysolutions.net/tools/salary-calculator',
+    canonical: 'https://nbs-salary-tool.vercel.app',
   },
 };
 
@@ -54,7 +54,7 @@ export default function Home() {
               NorthBay Solutions Salary Calculator
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Calculate your take-home salary, tax deductions, and manage your allowances with our comprehensive calculator tool.
+              Calculate your take-home salary, tax deductions, and manage your allowances with comprehensive calculator tool.
             </p>
           </div>
           
@@ -68,7 +68,7 @@ export default function Home() {
               href="/faq"
               className="text-blue-600 hover:text-blue-700 font-medium"
             >
-              Check out our FAQ section →
+              Check out FAQ section →
             </Link>
           </div>
         </div>

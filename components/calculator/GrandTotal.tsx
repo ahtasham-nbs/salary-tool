@@ -4,9 +4,10 @@ import { formatCurrency } from '@/utils/calculations';
 interface GrandTotalProps {
   salaryCalculation: SalaryCalculation;
   allowances: Allowances;
+  showPF: boolean;
 }
 
-export default function GrandTotal({ salaryCalculation, allowances }: GrandTotalProps) {
+export default function GrandTotal({ salaryCalculation, allowances, showPF }: GrandTotalProps) {
   const grandTotal = salaryCalculation.salaryAfterTax + allowances.total;
 
   return (
@@ -17,12 +18,22 @@ export default function GrandTotal({ salaryCalculation, allowances }: GrandTotal
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <div className="flex justify-between items-center text-gray-600">
-              <span>Take-Home Salary:</span>
-              <span className="font-medium">PKR {formatCurrency(salaryCalculation.salaryAfterTax)}</span>
+              <span>Gross Salary:</span>
+              <span className="font-medium">PKR {formatCurrency(salaryCalculation.grossSalary)}</span>
             </div>
             <div className="flex justify-between items-center text-gray-600">
+              <span>Tax Deduction:</span>
+              <span className="font-medium text-red-600">-PKR {formatCurrency(salaryCalculation.taxPerMonth)}</span>
+            </div>
+            {showPF && (
+              <div className="flex justify-between items-center text-gray-600">
+                <span>PF Deduction:</span>
+                <span className="font-medium text-red-600">-PKR {formatCurrency(salaryCalculation.pfDeduction)}</span>
+              </div>
+            )}
+            <div className="flex justify-between items-center text-gray-600">
               <span>Total Allowances:</span>
-              <span className="font-medium">PKR {formatCurrency(allowances.total)}</span>
+              <span className="font-medium text-green-600">+PKR {formatCurrency(allowances.total)}</span>
             </div>
             <div className="h-px bg-gray-200 my-3"></div>
             <div className="flex justify-between items-center text-lg font-bold text-green-700">

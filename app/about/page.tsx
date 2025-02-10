@@ -51,7 +51,7 @@ export default function About() {
               </h2>
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="text-lg font-medium text-blue-900 mb-2">
-                  Ahtasham
+                  Ahtasham Abbas
                 </h3>
                 <p className="text-blue-800">
                   Principal Software Engineer at NorthBay Solutions Pakistan

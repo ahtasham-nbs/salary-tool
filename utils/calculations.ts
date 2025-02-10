@@ -18,20 +18,22 @@ export function calculateTax24to25(amount: number): number {
   return Math.round(taxAmount);
 }
 
-export function calculateSalaryBreakdown(monthlySalary: number): SalaryCalculation {
+export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true): SalaryCalculation {
   const taxFreePortion = monthlySalary * 0.1;
   const taxableSalary = monthlySalary - taxFreePortion;
   const yearlyTaxableSalary = taxableSalary * 12;
   const yearlyTax = calculateTax24to25(yearlyTaxableSalary);
   const monthlyTax = yearlyTax / 12;
-  const salaryAfterTax = taxableSalary - monthlyTax + taxFreePortion;
+  const pfDeduction = includePF ? monthlySalary * 0.05 : 0;
+  const salaryAfterTax = taxableSalary - monthlyTax + taxFreePortion - pfDeduction;
 
   return {
     grossSalary: monthlySalary,
     taxFreePortion,
     taxableSalary,
     taxPerMonth: monthlyTax,
-    salaryAfterTax
+    salaryAfterTax,
+    pfDeduction
   };
 }
 

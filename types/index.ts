@@ -4,6 +4,7 @@ export interface SalaryCalculation {
   taxableSalary: number;
   taxPerMonth: number;
   salaryAfterTax: number;
+  pfDeduction: number;
 }
 
 export interface Allowances {
