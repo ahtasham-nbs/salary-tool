@@ -32,6 +32,10 @@ export default function GrandTotal({ salaryCalculation, allowances, showPF }: Gr
               </div>
             )}
             <div className="flex justify-between items-center text-gray-600">
+              <span>EOBI Deduction:</span>
+              <span className="font-medium text-red-600">-PKR {formatCurrency(salaryCalculation.eobiDeduction)}</span>
+            </div>
+            <div className="flex justify-between items-center text-gray-600">
               <span>Total Allowances:</span>
               <span className="font-medium text-green-600">+PKR {formatCurrency(allowances.total)}</span>
             </div>

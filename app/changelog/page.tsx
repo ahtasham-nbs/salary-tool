@@ -55,6 +55,7 @@ export default function Changelog() {
                                     ${entry.tag === 'Feature' ? 'bg-green-50 text-green-700 ring-1 ring-green-200' : ''}
                                     ${entry.tag === 'Enhancement' ? 'bg-blue-50 text-blue-700 ring-1 ring-blue-200' : ''}
                                     ${entry.tag === 'Security' ? 'bg-purple-50 text-purple-700 ring-1 ring-purple-200' : ''}
+                                    ${entry.tag === 'Bug' ? 'bg-red-50 text-red-700 ring-1 ring-red-200' : ''}
                                 `}>
                                     {entry.tag}
                                 </span>

@@ -1,5 +1,7 @@
 import { SalaryCalculation } from '@/types';
 
+export const EOBI_DEDUCTION = 320;
+
 export function calculateTax24to25(amount: number): number {
   let taxAmount = 0;
   
@@ -19,13 +21,26 @@ export function calculateTax24to25(amount: number): number {
 }
 
 export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true): SalaryCalculation {
+  if (!monthlySalary || isNaN(monthlySalary)) {
+    return {
+      grossSalary: 0,
+      taxFreePortion: 0,
+      taxableSalary: 0,
+      taxPerMonth: 0,
+      salaryAfterTax: 0,
+      pfDeduction: 0,
+      eobiDeduction: 0
+    };
+  }
+
   const taxFreePortion = monthlySalary * 0.1;
   const taxableSalary = monthlySalary - taxFreePortion;
   const yearlyTaxableSalary = taxableSalary * 12;
   const yearlyTax = calculateTax24to25(yearlyTaxableSalary);
   const monthlyTax = yearlyTax / 12;
   const pfDeduction = includePF ? monthlySalary * 0.05 : 0;
-  const salaryAfterTax = taxableSalary - monthlyTax + taxFreePortion - pfDeduction;
+  const eobiDeduction = EOBI_DEDUCTION;
+  const salaryAfterTax = taxableSalary - monthlyTax + taxFreePortion - pfDeduction - eobiDeduction;
 
   return {
     grossSalary: monthlySalary,
@@ -33,7 +48,8 @@ export function calculateSalaryBreakdown(monthlySalary: number, includePF: boole
     taxableSalary,
     taxPerMonth: monthlyTax,
     salaryAfterTax,
-    pfDeduction
+    pfDeduction,
+    eobiDeduction
   };
 }
 

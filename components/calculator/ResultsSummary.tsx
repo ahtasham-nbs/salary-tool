@@ -13,7 +13,8 @@ export default function ResultsSummary({ calculation, showPF }: ResultsSummaryPr
     taxableSalary,
     taxPerMonth,
     salaryAfterTax,
-    pfDeduction
+    pfDeduction,
+    eobiDeduction
   } = calculation;
 
   return (
@@ -29,11 +30,12 @@ export default function ResultsSummary({ calculation, showPF }: ResultsSummaryPr
       <div className="bg-gray-50 rounded-lg p-4">
         <h5 className="text-gray-600 mb-2">Monthly Deductions</h5>
         <div className="text-2xl font-semibold text-red-600">
-          PKR {formatCurrency(taxPerMonth + (showPF ? pfDeduction : 0))}
+          PKR {formatCurrency(taxPerMonth + (showPF ? pfDeduction : 0) + eobiDeduction)}
         </div>
         <div className="text-sm text-gray-500">
           Tax: PKR {formatCurrency(taxPerMonth)}
           {showPF && ` | PF: PKR ${formatCurrency(pfDeduction)}`}
+          {` | EOBI: PKR ${formatCurrency(eobiDeduction)}`}
         </div>
       </div>
       
