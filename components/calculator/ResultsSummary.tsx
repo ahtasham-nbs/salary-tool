@@ -4,9 +4,10 @@ import { formatCurrency } from '@/utils/calculations';
 interface ResultsSummaryProps {
   calculation: SalaryCalculation;
   showPF: boolean;
+  selectedYear?: '2024-2025' | '2025-2026';
 }
 
-export default function ResultsSummary({ calculation, showPF }: ResultsSummaryProps) {
+export default function ResultsSummary({ calculation, showPF, selectedYear = '2024-2025' }: ResultsSummaryProps) {
   const {
     grossSalary,
     taxFreePortion,
@@ -33,7 +34,7 @@ export default function ResultsSummary({ calculation, showPF }: ResultsSummaryPr
           PKR {formatCurrency(taxPerMonth + (showPF ? pfDeduction : 0) + eobiDeduction)}
         </div>
         <div className="text-sm text-gray-500">
-          Tax: PKR {formatCurrency(taxPerMonth)}
+          Tax ({selectedYear}): PKR {formatCurrency(taxPerMonth)}
           {showPF && ` | PF: PKR ${formatCurrency(pfDeduction)}`}
           {` | EOBI: PKR ${formatCurrency(eobiDeduction)}`}
         </div>
@@ -49,7 +50,7 @@ export default function ResultsSummary({ calculation, showPF }: ResultsSummaryPr
           </div>
           <div>
             <p>Taxable Monthly Salary: <span className="font-bold">{formatCurrency(taxableSalary)}</span></p>
-            <p>Monthly Tax: <span className="font-bold text-red-600">{formatCurrency(taxPerMonth)}</span></p>
+            <p>Monthly Tax ({selectedYear}): <span className="font-bold text-red-600">{formatCurrency(taxPerMonth)}</span></p>
           </div>
         </div>
       </div>

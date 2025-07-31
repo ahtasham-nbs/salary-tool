@@ -12,7 +12,8 @@ import {Allowances} from '@/types';
 const STORAGE_KEYS = {
     SALARY: 'salary_calculator_salary',
     ALLOWANCES: 'salary_calculator_allowances',
-    INCLUDE_PF: 'salary_calculator_include_pf'
+    INCLUDE_PF: 'salary_calculator_include_pf',
+    YEAR: 'salary_calculator_year'
 };
 
 
@@ -33,7 +34,8 @@ export default function SalaryCalculator() {
     const [allowances, setAllowances] = useState<Allowances>(initialAllowances);
     const [isLoading, setIsLoading] = useState(true);
     const [isReimbursementsOpen, setIsReimbursementsOpen] = useState(true);
-    const [includePF, setIncludePF] = useState<boolean>(true);
+    const [includePF, setIncludePF] = useState<boolean>(false);
+    const [selectedYear, setSelectedYear] = useState<'2024-2025' | '2025-2026'>('2025-2026');
 
 
     useEffect(() => {
@@ -54,6 +56,12 @@ export default function SalaryCalculator() {
                 const savedPFPreference = localStorage.getItem(STORAGE_KEYS.INCLUDE_PF);
                 if (savedPFPreference !== null) {
                     setIncludePF(savedPFPreference === 'true');
+                }
+
+
+                const savedYear = localStorage.getItem(STORAGE_KEYS.YEAR);
+                if (savedYear !== null && (savedYear === '2024-2025' || savedYear === '2025-2026')) {
+                    setSelectedYear(savedYear as '2024-2025' | '2025-2026');
                 }
 
 
@@ -114,9 +122,19 @@ export default function SalaryCalculator() {
         }
     };
 
+    // Save year preference to localStorage
+    const handleYearChange = (newYear: '2024-2025' | '2025-2026') => {
+        setSelectedYear(newYear);
+        try {
+            localStorage.setItem(STORAGE_KEYS.YEAR, newYear);
+        } catch (error) {
+            console.error('Error saving year preference:', error);
+        }
+    };
+
     const salaryCalculation = useMemo(() => {
-        return calculateSalaryBreakdown(salary, includePF);
-    }, [salary, includePF]);
+        return calculateSalaryBreakdown(salary, includePF, selectedYear);
+    }, [salary, includePF, selectedYear]);
 
     if (isLoading) {
         return <Loader/>;
@@ -134,9 +152,11 @@ export default function SalaryCalculator() {
                             localStorage.removeItem(STORAGE_KEYS.SALARY);
                             localStorage.removeItem(STORAGE_KEYS.ALLOWANCES);
                             localStorage.removeItem(STORAGE_KEYS.INCLUDE_PF);
+                            localStorage.removeItem(STORAGE_KEYS.YEAR);
                             setSalary(0);
                             setAllowances(initialAllowances);
                             setIncludePF(true);
+                            setSelectedYear('2024-2025');
                         } catch (error) {
                             console.error('Error clearing data:', error);
                         }
@@ -148,36 +168,51 @@ export default function SalaryCalculator() {
             </div>
 
             <div className="space-y-6">
-                {/* Salary Input with PF Toggle */}
+                {/* Salary Input with PF Toggle and Year Selection */}
                 <div className="bg-gray-50 rounded-lg p-6">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                         <h3 className="text-lg font-semibold text-gray-700">Monthly Salary</h3>
-                        <div className="flex items-center">
-                            <label className="relative inline-flex items-center cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    className="sr-only peer"
-                                    checked={includePF}
-                                    onChange={(e) => handlePFToggle(e.target.checked)}
-                                />
-                                <div
-                                    className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                <span className="ml-3 text-sm font-medium text-gray-600">
-                  Include Provident Fund
-                  <span className="hidden md:inline"> (5% of gross salary)</span>
-                </span>
-                            </label>
-                            <button
-                                className="ml-2 text-gray-400 hover:text-gray-600"
-                                title="Company matches your 5% PF contribution"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20"
-                                     fill="currentColor">
-                                    <path fillRule="evenodd"
-                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                          clipRule="evenodd"/>
-                                </svg>
-                            </button>
+                        <div className="flex items-center gap-4">
+                            {/* Year Selection Dropdown */}
+                            <div className="flex items-center gap-2">
+                                <label className="text-sm font-medium text-gray-600">Tax Year:</label>
+                                <select
+                                    value={selectedYear}
+                                    onChange={(e) => handleYearChange(e.target.value as '2024-2025' | '2025-2026')}
+                                    className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                >
+                                    <option value="2024-2025">2024-2025</option>
+                                    <option value="2025-2026">2025-2026</option>
+                                </select>
+                            </div>
+                            
+                            <div className="flex items-center">
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        className="sr-only peer"
+                                        checked={includePF}
+                                        onChange={(e) => handlePFToggle(e.target.checked)}
+                                    />
+                                    <div
+                                        className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                    <span className="ml-3 text-sm font-medium text-gray-600">
+                      Include Provident Fund
+                      <span className="hidden md:inline"> (5% of gross salary)</span>
+                    </span>
+                                </label>
+                                <button
+                                    className="ml-2 text-gray-400 hover:text-gray-600"
+                                    title="Company matches your 5% PF contribution"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20"
+                                         fill="currentColor">
+                                        <path fillRule="evenodd"
+                                              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                              clipRule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -187,7 +222,7 @@ export default function SalaryCalculator() {
                     />
                 </div>
 
-                <ResultsSummary calculation={salaryCalculation} showPF={includePF}/>
+                <ResultsSummary calculation={salaryCalculation} showPF={includePF} selectedYear={selectedYear}/>
 
                 <div className="mt-8">
                     <button

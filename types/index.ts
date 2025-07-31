@@ -6,6 +6,7 @@ export interface SalaryCalculation {
   salaryAfterTax: number;
   pfDeduction: number;
   eobiDeduction: number;
+  year?: '2024-2025' | '2025-2026';
 }
 
 export interface Allowances {

@@ -20,7 +20,43 @@ export function calculateTax24to25(amount: number): number {
   return Math.round(taxAmount);
 }
 
-export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true): SalaryCalculation {
+export function calculateTax25to26(amount: number): number {
+  let originalAmount = amount;
+  let taxAmount = 0;
+  
+  if (amount > 600000 && amount <= 1200000) {
+    amount -= 600000;
+    taxAmount = amount * 0.01;
+  } else if (amount > 1200000 && amount <= 2200000) {
+    amount -= 1200000;
+    taxAmount = 6000 + amount * 0.11;
+  } else if (amount > 2200000 && amount <= 3200000) {
+    amount -= 2200000;
+    taxAmount = 116000 + amount * 0.23;
+  } else if (amount > 3200000 && amount <= 4100000) {
+    amount -= 3200000;
+    taxAmount = 346000 + amount * 0.30;
+  } else if (amount > 4100000) {
+    amount -= 4100000;
+    taxAmount = 616000 + amount * 0.35;
+  }
+
+  if (originalAmount > 10000000) {
+    taxAmount = taxAmount * 1.09;
+  }
+
+  return Math.round(taxAmount);
+}
+
+export function calculateTax(amount: number, year: '2024-2025' | '2025-2026'): number {
+  if (year === '2025-2026') {
+    return calculateTax25to26(amount);
+  } else {
+    return calculateTax24to25(amount);
+  }
+}
+
+export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true, year: '2024-2025' | '2025-2026' = '2024-2025'): SalaryCalculation {
   if (!monthlySalary || isNaN(monthlySalary)) {
     return {
       grossSalary: 0,
@@ -36,7 +72,7 @@ export function calculateSalaryBreakdown(monthlySalary: number, includePF: boole
   const taxFreePortion = monthlySalary * 0.1;
   const taxableSalary = monthlySalary - taxFreePortion;
   const yearlyTaxableSalary = taxableSalary * 12;
-  const yearlyTax = calculateTax24to25(yearlyTaxableSalary);
+  const yearlyTax = calculateTax(yearlyTaxableSalary, year);
   const monthlyTax = yearlyTax / 12;
   const pfDeduction = includePF ? monthlySalary * 0.05 : 0;
   const eobiDeduction = EOBI_DEDUCTION;

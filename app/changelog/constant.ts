@@ -1,4 +1,16 @@
-export const CHANGE_LOGS = [
+export const CHANGE_LOGS = [    
+    {
+        date: "2025-02-13",
+        title: "Tax Year Selection Feature",
+        description: "Added support for multiple tax years (2024-2025 and 2025-2026) with updated tax rates. Users can now switch between different fiscal years to compare tax calculations. The 2025-2026 tax year includes new rates with reduced tax burden for lower income brackets and additional 9% surcharge for amounts over 10 million PKR.",
+        tag: "Feature"
+    },
+    {
+        date: "2025-02-13",
+        title: "PF Toggle Default Change 😴",
+        description: "Changed the default state of Provident Fund toggle to OFF by default. Now users need to actively opt-in for PF calculations instead of having it enabled automatically. This gives users more control over their calculations!",
+        tag: "Enhancement"
+    },
     {
         date: "2025-02-12",
         title: "EOBI Deduction Implementation",
