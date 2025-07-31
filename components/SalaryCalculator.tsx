@@ -155,8 +155,8 @@ export default function SalaryCalculator() {
                             localStorage.removeItem(STORAGE_KEYS.YEAR);
                             setSalary(0);
                             setAllowances(initialAllowances);
-                            setIncludePF(true);
-                            setSelectedYear('2024-2025');
+                            setIncludePF(false);
+                            setSelectedYear('2025-2026');
                         } catch (error) {
                             console.error('Error clearing data:', error);
                         }
