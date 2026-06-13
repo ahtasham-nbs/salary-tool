@@ -2,24 +2,24 @@ import Link from 'next/link'
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-gray-50 border-t border-gray-200">
+        <footer className="w-full bg-white border-t border-slate-200">
             <div className="container mx-auto px-4 py-8">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div className="flex items-center space-x-6 text-sm text-gray-600">
+                    <div className="flex items-center space-x-6 text-sm font-medium text-slate-600">
                         <Link
                             href="/changelog"
-                            className="hover:text-gray-900 transition-colors"
+                            className="hover:text-brand-700 transition-colors"
                         >
                             Changelog
                         </Link>
                         <Link
                             href="/faq"
-                            className="hover:text-gray-900 transition-colors"
+                            className="hover:text-brand-700 transition-colors"
                         >
                             FAQ
                         </Link>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-slate-500">
                         © {new Date().getFullYear()} Salary Tool. All rights reserved.
                     </div>
 
@@ -29,7 +29,7 @@ const Footer = () => {
                             href="https://github.com/ahtasham-nbs/salary-tool"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+                            className="flex items-center space-x-2 text-slate-600 hover:text-brand-700 transition-colors"
                         >
                             <svg
                                 className="w-5 h-5"

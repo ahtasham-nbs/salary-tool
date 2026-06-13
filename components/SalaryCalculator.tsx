@@ -141,11 +141,18 @@ export default function SalaryCalculator() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6">
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">
-                    Salary & Tax Calculator
-                </h2>
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-card ring-1 ring-slate-200/70 p-5 sm:p-7 animate-fade-up">
+            <div className="flex justify-between items-center gap-3 mb-6 pb-5 border-b border-slate-100">
+                <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m-6 4h6m-6 4h3M5 4.5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1v-13a1 1 0 011-1z" />
+                        </svg>
+                    </span>
+                    <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+                        Salary &amp; Tax Calculator
+                    </h2>
+                </div>
                 <button
                     onClick={() => {
                         try {
@@ -161,32 +168,36 @@ export default function SalaryCalculator() {
                             console.error('Error clearing data:', error);
                         }
                     }}
-                    className="px-4 py-2 text-sm text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-lg transition-colors shrink-0"
                 >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                    </svg>
                     Reset All
                 </button>
             </div>
 
             <div className="space-y-6">
                 {/* Salary Input with PF Toggle and Year Selection */}
-                <div className="bg-gray-50 rounded-lg p-6 sticky top-0 z-20 shadow-sm" id={'amount-container'}>
+                <div className="bg-slate-50 ring-1 ring-slate-200/80 rounded-xl p-5 sm:p-6 sticky top-[4.5rem] z-20 shadow-soft backdrop-blur-sm" id={'amount-container'}>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                        <h3 className="text-lg font-semibold text-gray-700">Monthly Salary</h3>
-                        <div className="flex items-center gap-4">
+                        <h3 className="text-base font-semibold text-slate-700">Monthly Salary</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                             {/* Year Selection Dropdown */}
                             <div className="flex items-center gap-2">
-                                <label className="text-sm font-medium text-gray-600">Tax Year:</label>
+                                <label htmlFor="tax-year" className="text-sm font-medium text-slate-600">Tax Year:</label>
                                 <select
+                                    id="tax-year"
                                     value={selectedYear}
                                     onChange={(e) => handleYearChange(e.target.value as TaxYear)}
-                                    className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="px-3 py-1.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg shadow-sm cursor-pointer hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-colors"
                                 >
                                     <option value="2026-2027">2026-2027</option>
                                     <option value="2025-2026">2025-2026</option>
                                     <option value="2024-2025">2024-2025</option>
                                 </select>
                             </div>
-                            
+
                             <div className="flex items-center">
                                 <label className="relative inline-flex items-center cursor-pointer">
                                     <input
@@ -196,14 +207,15 @@ export default function SalaryCalculator() {
                                         onChange={(e) => handlePFToggle(e.target.checked)}
                                     />
                                     <div
-                                        className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                    <span className="ml-3 text-sm font-medium text-gray-600">
+                                        className="w-11 h-6 bg-slate-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                    <span className="ml-3 text-sm font-medium text-slate-600">
                       Include Provident Fund
                       <span className="hidden md:inline"> (5% of gross salary)</span>
                     </span>
                                 </label>
                                 <button
-                                    className="ml-2 text-gray-400 hover:text-gray-600"
+                                    className="ml-2 text-slate-400 hover:text-slate-600 transition-colors"
+                                    aria-label="Company matches your 5% PF contribution"
                                     title="Company matches your 5% PF contribution"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20"
@@ -228,17 +240,24 @@ export default function SalaryCalculator() {
                 <div className="mt-8">
                     <button
                         onClick={() => setIsReimbursementsOpen(!isReimbursementsOpen)}
-                        className="flex items-center justify-between w-full text-left font-semibold text-xl mb-4"
+                        aria-expanded={isReimbursementsOpen}
+                        className="group flex items-center justify-between w-full text-left font-semibold text-lg sm:text-xl text-slate-800 mb-4"
                     >
-                        <span>Reimbursements & Allowances</span>
+                        <span>Reimbursements &amp; Allowances</span>
                         <span
-                            className="flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
-              {isReimbursementsOpen ? '−' : '+'}
-            </span>
+                            className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 text-slate-600 group-hover:bg-brand-50 group-hover:text-brand-600 transition-colors">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className={`h-5 w-5 transition-transform duration-300 ${isReimbursementsOpen ? 'rotate-180' : ''}`}
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </span>
                     </button>
 
                     {isReimbursementsOpen && (
-                        <div className="space-y-4">
+                        <div className="space-y-4 animate-fade-up">
                             <AllowancesSection
                                 allowances={allowances}
                                 setAllowances={handleAllowancesChange}
