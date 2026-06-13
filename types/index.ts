@@ -1,3 +1,5 @@
+export type TaxYear = '2024-2025' | '2025-2026' | '2026-2027';
+
 export interface SalaryCalculation {
   grossSalary: number;
   taxFreePortion: number;
@@ -6,7 +8,7 @@ export interface SalaryCalculation {
   salaryAfterTax: number;
   pfDeduction: number;
   eobiDeduction: number;
-  year?: '2024-2025' | '2025-2026';
+  year?: TaxYear;
 }
 
 export interface Allowances {

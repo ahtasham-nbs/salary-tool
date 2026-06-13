@@ -7,7 +7,7 @@ import AllowancesSection from './calculator/AllowancesSection';
 import GrandTotal from './calculator/GrandTotal';
 import Loader from './ui/Loader';
 import {calculateSalaryBreakdown} from '@/utils/calculations';
-import {Allowances} from '@/types';
+import {Allowances, TaxYear} from '@/types';
 
 const STORAGE_KEYS = {
     SALARY: 'salary_calculator_salary',
@@ -35,7 +35,7 @@ export default function SalaryCalculator() {
     const [isLoading, setIsLoading] = useState(true);
     const [isReimbursementsOpen, setIsReimbursementsOpen] = useState(true);
     const [includePF, setIncludePF] = useState<boolean>(false);
-    const [selectedYear, setSelectedYear] = useState<'2024-2025' | '2025-2026'>('2025-2026');
+    const [selectedYear, setSelectedYear] = useState<TaxYear>('2026-2027');
 
 
     useEffect(() => {
@@ -60,8 +60,8 @@ export default function SalaryCalculator() {
 
 
                 const savedYear = localStorage.getItem(STORAGE_KEYS.YEAR);
-                if (savedYear !== null && (savedYear === '2024-2025' || savedYear === '2025-2026')) {
-                    setSelectedYear(savedYear as '2024-2025' | '2025-2026');
+                if (savedYear !== null && (savedYear === '2024-2025' || savedYear === '2025-2026' || savedYear === '2026-2027')) {
+                    setSelectedYear(savedYear as TaxYear);
                 }
 
 
@@ -123,7 +123,7 @@ export default function SalaryCalculator() {
     };
 
     // Save year preference to localStorage
-    const handleYearChange = (newYear: '2024-2025' | '2025-2026') => {
+    const handleYearChange = (newYear: TaxYear) => {
         setSelectedYear(newYear);
         try {
             localStorage.setItem(STORAGE_KEYS.YEAR, newYear);
@@ -156,7 +156,7 @@ export default function SalaryCalculator() {
                             setSalary(0);
                             setAllowances(initialAllowances);
                             setIncludePF(false);
-                            setSelectedYear('2025-2026');
+                            setSelectedYear('2026-2027');
                         } catch (error) {
                             console.error('Error clearing data:', error);
                         }
@@ -169,7 +169,7 @@ export default function SalaryCalculator() {
 
             <div className="space-y-6">
                 {/* Salary Input with PF Toggle and Year Selection */}
-                <div className="bg-gray-50 rounded-lg p-6">
+                <div className="bg-gray-50 rounded-lg p-6 sticky top-0 z-20 shadow-sm" id={'amount-container'}>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                         <h3 className="text-lg font-semibold text-gray-700">Monthly Salary</h3>
                         <div className="flex items-center gap-4">
@@ -178,11 +178,12 @@ export default function SalaryCalculator() {
                                 <label className="text-sm font-medium text-gray-600">Tax Year:</label>
                                 <select
                                     value={selectedYear}
-                                    onChange={(e) => handleYearChange(e.target.value as '2024-2025' | '2025-2026')}
+                                    onChange={(e) => handleYearChange(e.target.value as TaxYear)}
                                     className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
-                                    <option value="2024-2025">2024-2025</option>
+                                    <option value="2026-2027">2026-2027</option>
                                     <option value="2025-2026">2025-2026</option>
+                                    <option value="2024-2025">2024-2025</option>
                                 </select>
                             </div>
                             

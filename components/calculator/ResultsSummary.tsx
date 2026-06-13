@@ -1,13 +1,13 @@
-import { SalaryCalculation } from '@/types';
+import { SalaryCalculation, TaxYear } from '@/types';
 import { formatCurrency } from '@/utils/calculations';
 
 interface ResultsSummaryProps {
   calculation: SalaryCalculation;
   showPF: boolean;
-  selectedYear?: '2024-2025' | '2025-2026';
+  selectedYear?: TaxYear;
 }
 
-export default function ResultsSummary({ calculation, showPF, selectedYear = '2024-2025' }: ResultsSummaryProps) {
+export default function ResultsSummary({ calculation, showPF, selectedYear = '2026-2027' }: ResultsSummaryProps) {
   const {
     grossSalary,
     taxFreePortion,

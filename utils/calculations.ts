@@ -1,4 +1,4 @@
-import { SalaryCalculation } from '@/types';
+import { SalaryCalculation, TaxYear } from '@/types';
 
 export const EOBI_DEDUCTION = 320;
 
@@ -48,15 +48,46 @@ export function calculateTax25to26(amount: number): number {
   return Math.round(taxAmount);
 }
 
-export function calculateTax(amount: number, year: '2024-2025' | '2025-2026'): number {
-  if (year === '2025-2026') {
+export function calculateTax26to27(amount: number): number {
+  let taxAmount = 0;
+
+  if (amount > 600000 && amount <= 1200000) {
+    amount -= 600000;
+    taxAmount = amount * 0.01;
+  } else if (amount > 1200000 && amount <= 2200000) {
+    amount -= 1200000;
+    taxAmount = 6000 + amount * 0.11;
+  } else if (amount > 2200000 && amount <= 3200000) {
+    amount -= 2200000;
+    taxAmount = 116000 + amount * 0.20;
+  } else if (amount > 3200000 && amount <= 4100000) {
+    amount -= 3200000;
+    taxAmount = 316000 + amount * 0.25;
+  } else if (amount > 4100000 && amount <= 5600000) {
+    amount -= 4100000;
+    taxAmount = 541000 + amount * 0.29;
+  } else if (amount > 5600000 && amount <= 7000000) {
+    amount -= 5600000;
+    taxAmount = 976000 + amount * 0.32;
+  } else if (amount > 7000000) {
+    amount -= 7000000;
+    taxAmount = 1424000 + amount * 0.35;
+  }
+
+  return Math.round(taxAmount);
+}
+
+export function calculateTax(amount: number, year: TaxYear): number {
+  if (year === '2026-2027') {
+    return calculateTax26to27(amount);
+  } else if (year === '2025-2026') {
     return calculateTax25to26(amount);
   } else {
     return calculateTax24to25(amount);
   }
 }
 
-export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true, year: '2024-2025' | '2025-2026' = '2024-2025'): SalaryCalculation {
+export function calculateSalaryBreakdown(monthlySalary: number, includePF: boolean = true, year: TaxYear = '2026-2027'): SalaryCalculation {
   if (!monthlySalary || isNaN(monthlySalary)) {
     return {
       grossSalary: 0,

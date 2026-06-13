@@ -1,4 +1,10 @@
-export const CHANGE_LOGS = [    
+export const CHANGE_LOGS = [
+    {
+        date: "2026-06-13",
+        title: "FY 2026-2027 Tax Year Added 🎉",
+        description: "Added support for the new fiscal year 2026-2027 based on the Federal Budget 2026-27 (Finance Act 2026). The top 35% bracket has been split into reduced sub-bands (29% for 4.1M–5.6M, 32% for 5.6M–7M, and 35% above 7M annually), and the 9% surcharge on the salaried class has been abolished. 2026-2027 is now selected by default while previous years remain available for comparison.",
+        tag: "Feature"
+    },
     {
         date: "2025-02-13",
         title: "Tax Year Selection Feature",
