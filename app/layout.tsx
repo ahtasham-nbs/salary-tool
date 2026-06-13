@@ -3,7 +3,11 @@ import Header from "@/components/Header";
 import Footer from '@/components/Footer'
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
 
 export default function RootLayout({
   children,
@@ -27,9 +31,9 @@ export default function RootLayout({
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <Header />
-        <div>
+        <div className="flex-1 flex flex-col">
           {children}
           <Footer />
         </div>

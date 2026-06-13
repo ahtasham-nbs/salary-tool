@@ -8,13 +8,16 @@ interface SalaryInputProps {
 export default function SalaryInput({ value, onChange }: SalaryInputProps) {
   return (
     <div className="relative flex items-center">
-      <span className="absolute left-3 text-gray-500">PKR</span>
+      <span className="pointer-events-none absolute left-3 inline-flex items-center rounded-md bg-brand-50 px-2 py-1 text-xs font-semibold text-brand-700">
+        PKR
+      </span>
       <input
         type="number"
-        className="w-full pl-16 pr-4 py-3 text-lg border border-gray-200 bg-white rounded-lg outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all"
+        inputMode="decimal"
+        className="w-full pl-16 pr-4 py-3.5 text-lg font-semibold text-slate-900 tabular-nums border border-slate-300 bg-white rounded-xl shadow-sm outline-none placeholder:font-normal placeholder:text-slate-400 hover:border-slate-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
         value={value || ''}
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-        placeholder="Enter Monthly Salary"
+        placeholder="Enter monthly salary"
         autoComplete="off"
       />
     </div>

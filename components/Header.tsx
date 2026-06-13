@@ -15,20 +15,20 @@ export default function Header() {
   ];
 
   return (
-    <nav className="relative w-full bg-white shadow-md">
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/70">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+            <Link href="/" className="flex items-center space-x-2.5 group">
+              <div className="w-9 h-9 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center shadow-soft transition-transform duration-200 group-hover:scale-105">
                 <span className="text-white font-bold text-lg">N</span>
               </div>
-              <div>
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <div className="leading-tight">
+                <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent">
                   NorthBay
                 </span>
-                <span className="text-sm text-gray-500 block -mt-1">Calculator</span>
+                <span className="text-xs font-medium tracking-wide text-slate-400 block -mt-0.5">Calculator</span>
               </div>
             </Link>
           </div>
@@ -39,10 +39,11 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
+                aria-current={pathname === href ? 'page' : undefined}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname === href
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-brand-50 text-brand-700'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
                 {label}
@@ -54,7 +55,9 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-600 hover:bg-gray-50"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMobileMenuOpen}
+              className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
             >
               <svg
                 className="h-6 w-6"
@@ -95,10 +98,11 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
+                aria-current={pathname === href ? 'page' : undefined}
                 className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                   pathname === href
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'bg-brand-50 text-brand-700'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >

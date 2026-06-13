@@ -34,7 +34,7 @@ export default function Changelog() {
             </motion.div>
 
             <motion.div
-                className="space-y-12 border-l-2 border-blue-300 pl-8"
+                className="space-y-12 border-l-2 border-brand-200 pl-8"
                 variants={container}
                 initial="hidden"
                 animate="show"
@@ -46,7 +46,7 @@ export default function Changelog() {
                         variants={item}
                     >
                         <div className="absolute -left-[41px] flex items-center justify-center">
-                            <div className="w-5 h-5 bg-blue-500 rounded-full ring-8 ring-white group-hover:ring-blue-50 transition-all duration-300 group-hover:scale-110"></div>
+                            <div className="w-5 h-5 bg-brand-500 rounded-full ring-8 ring-white group-hover:ring-brand-50 transition-all duration-300 group-hover:scale-110"></div>
                         </div>
                         <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
                             <div className="flex items-center justify-between mb-4">
@@ -61,7 +61,7 @@ export default function Changelog() {
                                 </span>
                                 <time className="text-sm text-gray-500 font-medium">{entry.date}</time>
                             </div>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                            <h2 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-brand-600 transition-colors duration-300">
                                 {entry.title}
                             </h2>
                             <p className="text-gray-600 leading-relaxed text-lg">

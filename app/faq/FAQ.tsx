@@ -61,18 +61,18 @@ function AccordionItem({
     onClick: () => void;
 }) {
     return (
-        <div className="border-b border-gray-200 last:border-0">
+        <div className="border-b border-slate-200 last:border-0">
             <button
-                className="w-full py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors px-4 rounded-lg"
+                className="w-full py-4 text-left flex justify-between items-center hover:bg-slate-50 transition-colors px-4 rounded-lg"
                 onClick={onClick}
                 aria-expanded={isOpen}
             >
-                <h2 className="text-lg font-semibold text-gray-800 pr-8">
+                <h2 className="text-lg font-semibold text-slate-800 pr-8">
                     {question}
                 </h2>
                 <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
           <svg
-              className="w-6 h-6 text-gray-500"
+              className="w-6 h-6 text-slate-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -91,7 +91,7 @@ function AccordionItem({
                     isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}
             >
-                <p className="p-4 text-gray-600 leading-relaxed">
+                <p className="px-4 pb-4 text-slate-600 leading-relaxed">
                     {answer}
                 </p>
             </div>
@@ -111,14 +111,14 @@ export default function FAQ() {
     };
 
     return (
-        <main className="min-h-screen bg-gray-100">
+        <main className="flex-1">
             <div className="container mx-auto py-12 px-4">
-                <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-                    <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-card ring-1 ring-slate-200/70 p-8 animate-fade-up">
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 mb-8">
                         Frequently Asked Questions
                     </h1>
 
-                    <div className="divide-y divide-gray-200">
+                    <div className="divide-y divide-slate-200">
                         {faqData.map((item, index) => (
                             <AccordionItem
                                 key={index}
@@ -130,17 +130,17 @@ export default function FAQ() {
                         ))}
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-gray-200">
+                    <div className="mt-8 pt-6 border-t border-slate-200">
                         <div className="text-center">
-                            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                            <h3 className="text-lg font-semibold text-slate-800 mb-2">
                                 Still have questions?
                             </h3>
-                            <p className="text-gray-600 mb-4">
+                            <p className="text-slate-600 mb-4">
                                 We're here to help! Feel free to reach out to support team.
                             </p>
-                            <a 
+                            <a
                                 href="mailto:ahtasham.abbas@northbaysolutions.net?subject=Support Inquiry&body=Hello Ahtasham,"
-                                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+                                className="inline-flex items-center gap-2 font-semibold text-brand-600 hover:text-brand-700 transition-colors"
                             >
                                 <svg 
                                     className="w-5 h-5" 
